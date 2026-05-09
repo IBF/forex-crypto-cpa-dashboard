@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-background: #0B0E11;
+  --color-surface: #111417;
+  --color-surface-hover: #1A1D21;
+  --color-surface-border: rgba(255, 255, 255, 0.08);
+
+  /* Crypto Accents */
+  --color-crypto: #BB86FC;
+  --color-crypto-glow: rgba(187, 134, 252, 0.5);
+  
+  /* Forex Accents */
+  --color-forex: #00C853;
+  --color-forex-glow: rgba(0, 200, 83, 0.5);
+  --color-forex-alt: #FFD700;
+
+  /* Neutrals */
+  --color-content: #E1E2E7;
+  --color-content-muted: #978D9D;
+  --color-content-subtle: #4B4452;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-surface-border);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.02);
+  }
+  
+  .glass-panel-hover {
+    transition: all 0.2s ease-in-out;
+  }
+  .glass-panel-hover:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .neon-text-crypto {
+    color: var(--color-crypto);
+    text-shadow: 0 0 12px var(--color-crypto-glow);
+  }
+
+  .neon-text-forex {
+    color: var(--color-forex);
+    text-shadow: 0 0 12px var(--color-forex-glow);
+  }
+
+  .neon-border-crypto {
+    border-color: var(--color-crypto);
+    box-shadow: 0 0 12px var(--color-crypto-glow);
+  }
+
+  .neon-border-forex {
+    border-color: var(--color-forex);
+    box-shadow: 0 0 12px var(--color-forex-glow);
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-content);
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-content-subtle);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-content-muted);
+}
