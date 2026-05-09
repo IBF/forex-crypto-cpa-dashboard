@@ -6,11 +6,12 @@ import { ChevronUp, ChevronDown, ExternalLink } from 'lucide-react';
 interface CampaignTableProps {
   campaigns: CampaignData[];
   multiplier: number;
+  geoFilter: string;
 }
 
 type SortKey = keyof CampaignData['baseStats'] | 'name' | 'type';
 
-export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, multiplier }) => {
+export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, multiplier, geoFilter }) => {
   const [sortKey, setSortKey] = useState<SortKey>('revenue');
   const [sortAsc, setSortAsc] = useState(false);
 
@@ -121,7 +122,24 @@ export const CampaignTable: React.FC<CampaignTableProps> = ({ campaigns, multipl
                           }} 
                         />
                       </div>
-                      <span className="font-semibold">{c.name}</span>
+                      <div className="flex flex-col gap-1 justify-center">
+                        <span className="font-semibold leading-none">{c.name}</span>
+                        <div className="flex flex-wrap gap-1">
+                          {c.geos.map(geo => (
+                            <span 
+                              key={geo} 
+                              className={cn(
+                                "text-[9px] px-1 py-0.5 rounded-sm tracking-widest font-mono border",
+                                geoFilter === geo || geoFilter === 'ALL' 
+                                  ? "bg-surface-border/50 text-content border-surface-border" 
+                                  : "text-content-muted border-transparent opacity-50"
+                              )}
+                            >
+                              {geo}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td className="px-5 py-4 text-left font-mono text-content-muted text-xs">

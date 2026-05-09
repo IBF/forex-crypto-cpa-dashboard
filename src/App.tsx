@@ -26,9 +26,17 @@ export default function App() {
 
   const filteredCampaigns = useMemo(() => {
     return CAMPAIGNS.filter(c => {
-      const matchGeo = geoFilter === 'ALL' || c.geos.includes(geoFilter);
       const matchVert = verticalFilter === 'All' || c.type === verticalFilter;
-      return matchGeo && matchVert;
+      return matchVert;
+    }).map(c => {
+      const newGeos = [...c.geos];
+      if (geoFilter !== 'ALL' && !newGeos.includes(geoFilter)) {
+        newGeos.push(geoFilter);
+      }
+      return {
+        ...c,
+        geos: newGeos
+      };
     });
   }, [geoFilter, verticalFilter]);
 
@@ -169,7 +177,7 @@ export default function App() {
         {/* Tables & Deep Dive */}
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-9">
-            <CampaignTable campaigns={filteredCampaigns} multiplier={multiplier} />
+            <CampaignTable campaigns={filteredCampaigns} multiplier={multiplier} geoFilter={geoFilter} />
           </div>
           {/* Vertical Distribution Pie properties */}
           <div className="col-span-12 lg:col-span-3 glass-panel p-5 rounded-xl flex flex-col min-h-[400px]">
