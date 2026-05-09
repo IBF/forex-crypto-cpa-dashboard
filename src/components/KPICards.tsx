@@ -22,7 +22,7 @@ export const KPICard: React.FC<KPICardProps> = ({ title, value, prefix = '', suf
           {prefix}{value}{suffix}
         </h3>
         {trend !== undefined && (
-          <div className={cn("flex items-center text-xs font-medium whitespace-nowrap shrink-0", isPositive ? "text-forex" : "text-red-400")}>
+          <div className={cn("hidden sm:flex items-center text-xs font-medium whitespace-nowrap shrink-0", isPositive ? "text-forex" : "text-red-400")}>
             {isPositive ? <TrendingUp size={14} className="mr-1" /> : <TrendingDown size={14} className="mr-1" />}
             {Math.abs(trend)}%
           </div>
